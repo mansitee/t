@@ -1,0 +1,2646 @@
+<!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Simple PWA</title>
+	<link rel="canonical" href="https://simplepwa.com" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- Icons and Colors -->
+	<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+	<link rel="manifest" href="./manifest.json">
+	<link rel="mask-icon" href="./safari-pinned-tab.svg" color="#000000">
+	<link rel="shortcut icon" href="./favicon.ico">
+	<meta name="msapplication-TileColor" content="#000000">
+	<meta name="msapplication-TileImage" content="./mstile-144x144.png">
+	<meta name="msapplication-config" content="./browserconfig.xml">
+	<meta name="theme-color" content="#000000">
+	
+	<!-- SEO and Social Sharing and SEO -->
+	<meta name="description" content="Simple Progressive Web App (PWA) template" />
+	<meta name="robots" content="noodp" />
+	<meta name="author" content="Nicole Furlan">
+	<meta name="keywords" content="progressive web app, progressive web application, pwa, pwa progressive web app, pwa progressive web application, progressive app, basic progressive web app, basic progressive web application, basic pwa, example progressive web app, example progressive web application, example pwa, progressive web app basic, progressive web app builder, progressive web app example, progressive web app sample, progressive web app template, sample progressive web app, sample progressive web application, sample pwa, free progressive web application template, progressive web application template, progressive web app template free, progressive web app template free download, progressive web app html template, progressive web app template github" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Simple PWA" />
+	<meta property="og:description" content="Simple Progressive Web App (PWA) template" />
+	<meta property="og:url" content="https://simplepwa.com" />
+	<meta property="og:site_name" content="Simple PWA" />
+	<meta property="section:publisher" content="https://www.facebook.com/simplepwa/" />
+	<meta property="og:image" content="https://simplepwa.com/share.jpg" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Simple PWA" />
+	<meta name="twitter:description" content="Simple Progressive Web App (PWA) template" />
+	<meta name="twitter:site" content="@simplepwa" />
+	<meta name="twitter:image" content="https://simplepwa.com/share.jpg" />
+	<meta name="twitter:creator" content="@nicolemfurlan" />
+
+	
+
+	<!-- Javscript -->
+	<script>
+		if ("serviceWorker" in navigator) {
+			window.addEventListener("load", () => {
+				navigator.serviceWorker && navigator.serviceWorker.register("./sw.js");
+			});
+		}
+	</script>
+	<script defer src="./main.js"></script>
+	 
+<style>
+        ::root {
+    /* Warna */
+    --font-family: Arial, sans-serif;
+    --bg-color: #F8F9FA;
+    --primary-color: #28A745;
+    --accent-color: #F44336;
+    --card-bg: #E8F5E9;
+    --category-card-bg: #E2EEFF;
+    --notif-bg: #fff;
+    --notif-border: #28A745;
+    --notif-color: #F44336;
+    --tab-bar-bg: wheat;
+    --ad-card-border: #f39c12;
+    --ad-card-bg: #fcf8e3;
+    --card-border: 1px solid #28A745;
+    --trending-bg: #EF9A9A;
+    --trending-color: #F44336;
+    --trending-item-width: 10%;
+    --trending-item-border-radius: 10%;
+    --trending-item-border: 3px solid transparent;
+    --trending-item-hover-bg: #A5D6A7;
+    --trending-item-hover-border-color: #ff4b2b;
+    --trending-item-text-color: #fff;
+    --trending-item-text-bg: #28A745;
+    --trending-item-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    --trending-img-border: 1px solid #28A745;
+    --trending-img-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    --scrollbar-thumb-color: rgba(0, 0, 0, 0.3);
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --border-radius: 20px;
+}
+
+/* Global Styles */
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 20px 0 60px;
+    margin-bottom: 50px;
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Scroll and container adjustments */
+.tab-bar {
+    margin-top: 60px;
+}
+
+#container {
+    margin-top:5px;
+}
+
+.horizontal-scroll {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    z-index: 1000;
+    background-color: var(--scrollbar-thumb-color);
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    white-space: nowrap;
+}
+
+.horizontal-scroll a {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px;
+    margin-right: 10px;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    flex-shrink: 0;
+    text-transform: uppercase;
+    box-shadow: var(--box-shadow);
+}
+
+.horizontal-scroll a:hover {
+    background: var(--primary-color);
+    color: #333;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Category Card */
+.category-card {
+    max-width: 600px;
+    margin: 5px auto;
+    background: var(--category-card-bg);
+    color: var(--accent-color);
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    column-gap: 4px;
+    column-count: 4;
+    column-fill: balance;
+}
+
+.category-card h2 {
+    margin-top: 0;
+    font-size: 1.0em;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+/* Card Styles */
+.card {position:relative; 
+    border: var(--card-border);
+    margin-bottom: 5px;
+    padding: 10px 0;
+    border-radius: 15px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: linear-gradient(to bottom, #fff, #F0F0F0, #E8F5E9, #C8E6C9, #A5D6A7);
+    border-radius: 15px 15px 10px 10px;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 0.9em;
+    margin-top: 0;
+    white-space: wrap;
+    color: transparent;
+}
+
+.card p {tposition:absolute; /* Untuk memungkinkan elemen diatur secara relatif */
+    top: 0; /* Menempatkan elemen di atas */
+    right: 0; /* Menempatkan elemen di sisi kanan */
+    margin: 5px 0;
+    margin-bottom: 5px;
+    color: #333;
+    font-size:0.8em;
+    
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    white-space: wrap;
+}
+
+.card a {
+    color: #333333;
+    width: 100%;
+    text-decoration: none;
+    font-size: 0.8em;
+    background: var(--card-bg);
+    padding: 5px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px #e0e0e0;
+    border: var(--card-border);
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.card .tags {
+    margin-top: 10px;
+}
+
+.card .tags span {
+    background: #4CAF50;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+    font-size: 0.6em;
+}
+
+/* Tab Bar */
+.tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999;
+    align-items: center;
+    background: var(--tab-bar-bg);
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab-bar a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+/* Ad Card */
+.ad-card {
+    border: 1px dashed var(--ad-card-border);
+    padding: 15px;
+    background: var(--ad-card-bg);
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    cursor: pointer;
+    font-size: 0.9em;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Notification */
+.notif {
+    justify-content: center;
+    position: relative;
+    ttop: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 98%;
+    display: flex;
+    margin-top: 3px;
+    padding: 10px 0;
+    border-radius: 15px;
+    text-align: center;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: var(--notif-bg);
+    border-radius: 15px 15px 10px 10px;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notif h1,
+.notif h2 {
+    color: var(--notif-color);
+    text-decoration: none;
+    font-size: 16px;
+    border: 1px solid var(--notif-border);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    border-radius: 24px;
+}
+
+/* Trending Container */
+.trending-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 5px;
+    tmargin-top: 1vh;
+    ttop: 0vh;
+    twidth: 100%;
+}
+
+.trending-item {
+    min-width: 80px;
+    width: var(--trending-item-width);
+    text-align: center;
+    flex-shrink: 0;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+    border-radius: var(--trending-item-border-radius);
+    overflow: hidden;
+    padding: 5px;
+    border: var(--trending-item-border);
+    background: var(--trending-bg);
+    color: var(--trending-color);
+    box-shadow: var(--trending-item-shadow);
+}
+
+.trending-item a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+}
+
+.trending-item img {
+    width: 100%;
+    height: 60px;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border-radius: 30%;
+    border: var(--trending-img-border);
+    box-shadow: var(--trending-img-shadow);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 5px;
+}
+
+.trending-item p {
+    font-size: 14px;
+    color: var(--trending-item-text-color);
+    font-weight: bold;
+    text-align: center;
+    padding: 5px; 
+    margin-top: 25px;
+    border: 1px solid #ff4b2b;
+    background: var(--trending-item-text-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 30px;
+}
+
+.trending-item:hover {
+    transform: scale(1.1);
+    border-color: var(--trending-item-hover-border-color);
+    background: var(--trending-item-hover-bg);
+}
+
+.trending-item:hover img {
+    transform: scale(1.1);
+}
+
+.trending-container::-webkit-scrollbar {
+    height: 0;
+}
+
+.trending-container::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color);
+    border-radius: 10px;
+}
+
+/* General Button Styles */
+button {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide Webkit Scrollbar */
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+   
+
+/* Mobile Navigation */
+@media (max-width: 480px) {
+.nav-item {font-size: 12px;}
+.nav-icon {font-size: 18px;}
+.trending-container {
+    display: flex;
+    overflow-x: auto; /* Memungkinkan scroll horizontal */
+    padding: 10px;
+    gap:5px; ttop:10%;
+    margin-top: 10vh;
+    twidth: 100%;}}
+     
+    
+/* Tablet - Left-side Navigation */     
+@media (min-width: 481px) and (max-width: 768px) {.category-card{border-radius:15px;
+ width:90%;  gap:0.6rem;
+  column-count:6; 
+  column-fill: balance;
+  justify-content: space-between;
+  overflow: auto;} 
+
+  .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        } 
+  
+  }
+  
+/* Laptop and Desktop */
+@media (min-width: 769px) {.category-card{border-radius:15px;
+ width:90%;  gap:0.6rem;
+  column-count:8; 
+  column-fill: balance;
+  justify-content: space-between;
+  overflow: auto;} 
+    
+ .header{position:fixed;margin-top:2%;}   
+ 
+ .trending-container {
+    display: flex;
+    overflow-x: auto; /* Memungkinkan scroll horizontal */
+    padding: 10px;
+    gap:5px; ttop:40%;
+    margin-top:100px; 
+    twidth: 100%;}
+}
+           
+  
+@media (min-width: 768px) {
+    /* Styles for tablets and larger devices */ 
+        .header {
+            position: fixed;
+            top: 0; height:40px;
+            tbox-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;} 
+            
+            .horizontal-scroll {
+        position: fixed;
+            bottom:0px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            overflow-x:auto;
+            background:#FFEBEE;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+        }}
+
+@media only screen and (max-width: 600px) {  .category-card{border-radius:15px;
+ max-width:600px; column-gap: 4px;
+     column-count:4; 
+     column-fill: balance;
+  justify-content: space-between;
+  overflow: auto;} }
+ 
+  
+  
+  
+
+/* Responsif: Tampilan di PC dan laptop (lebih besar dari 1024px) */
+@media screen and (min-width: 1024px) {
+    .trending-item {
+        min-width: 100px;
+    }
+
+    .trending-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .trending-item p {
+        font-size: 16px;
+    }
+} 
+
+/* Responsif: Tampilan di tablet (lebih besar dari 768px dan kurang dari 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .trending-item {
+        min-width: 90px;
+    }
+
+    .trending-item img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .trending-item p {
+        font-size: 15px;
+    }
+} 
+
+/* Responsif: Tampilan di perangkat Android dan layar kecil (lebih kecil dari 768px) */
+@media screen and (max-width: 768px) {
+    .trending-item {
+        min-width: 70px;
+        padding: 3px;
+    }
+
+    .trending-item img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .trending-item p {
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+/* Dark Mode based on system preference */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #181818;
+        color: #e0e0e0;
+    }
+}
+
+
+/* Default light mode */
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #333;
+    --link-color: #1a73e8;
+    --button-bg: #F44336;
+    --button-hover-bg: #66BB6A;
+    --header-bg: linear-gradient(45deg, #ff416c, #ff4b2b);
+    --header-box-shadow: rgba(0, 0, 0, 0.1);
+    --card-bg: #fff;
+    --card-text-color: #333;
+    --category-card-bg: #fff;
+    --category-card-text-color: #333;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --bg-color: #181818;
+    --text-color: #e0e0e0;
+    --link-color: #9ecfff;
+    --button-bg: #6200ea;
+    --button-hover-bg: #3700b3;
+    --header-bg: #e0e0e0;
+    --header-box-shadow: rgba(0, 0, 0, 0.2);
+    --card-bg: #333;
+    --card-text-color: #fff;
+    --category-card-bg: #444;
+    --category-card-text-color: #e0e0e0;
+}
+
+/* Apply the colors based on custom properties */
+body {
+    background-color: var(--bg-color);
+    tcolor: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px 0 60px;
+}
+
+a {tcolor:var(--link-color);}
+button {background-color:var(--button-bg);}
+
+button:hover {background-color: var(--button-hover-bg);}
+
+.notif h1,
+.notif h2 {color: #F44336;}
+
+.header {background: var(--header-bg);
+box-shadow: 0 2px 10px var(--header-box-shadow);}
+
+.category-card {background: var(--category-card-bg);color: var(--category-card-text-color);}
+
+.card {tbackground: var(--card-bg);
+border:none;box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); }
+
+.card a {color: var(--category-card-text-color);}
+
+.card h3 {font-size:0.9em;
+            margin-top: 0;white-space:wrap;color: #28A745; }
+
+/* You can continue to define other elements similarly */
+
+.trending-item {
+    background: var(--card-bg);
+    color: var(--card-text-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);border-radius: 10px;
+}
+.horizontal-scroll {background: var(--card-bg); color: var(--card-text-color);}
+
+.horizontal-scroll a {background: var(--bg-color); color: var(--card-text-color);border-radius: 10px;}
+
+
+.notif {background: var(--card-bg);
+    color: var(--card-text-color);}
+.header {background: var(--card-bg);
+    color: var(--card-text-color);}    
+.id {background: var(--card-bg);
+    color: var(--card-text-color);}    
+    
+/* Button for Dark Mode Toggle */
+#toggle-dark-mode{
+    position: fixed;
+    top:0px;
+    right:15px;
+    padding:5px 5px;
+    tbackground-color: transparent;
+    backdrop-filter: blur(25px);
+    background-color: rgba(255, 255, 255, 0.3);
+    tbox-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Ensures it's on top */
+    transition: background-color 0.3s ease;
+}
+
+
+
+
+
+/* Change button background color when in dark mode */
+body.dark-mode #toggle-dark-mode {
+    tbackground-color: #3700b3;
+}
+
+#toggle-dark-mode:hover {
+    tbackground-color: #6200ea;
+}
+
+/* Optionally, we can add a hover effect for the button */
+#toggle-dark-mode:active {
+    tbackground-color: #3f0071;
+}
+
+</style>
+</head>
+<body>
+	
+    
+    <div class="horizontal-scroll" id="menu"> </div>
+    
+    <div class="trending-container" id="trending-container"> </div>
+
+
+<button id="toggle-dark-mode">🌞</button>
+
+
+    <div class="notif">
+ <br/>   <h1 id="ip-address">IP </h1>    <h1 id="country"class="tid"href="https://ipinfo.io/">Country </h1>  <h1 id="screen">Device 1920 x 1080</h1>  <h2> 🌏</h2>
+ 	
+ 
+ </div>                    
+    <div id="container"></div>
+ 
+    
+<div class="posts-container" id="posts-container">
+    <!-- Postingan akan dihasilkan melalui JavaScript -->
+</div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const data = [
+  {
+    "id": "",
+    "name": "Chatgpt",
+    "category": "ai",
+    "url": "https://chat.openai.com/?q=",
+    "description": "OpenAi",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Bing Ai",
+    "category": "ai",
+    "url": "https://www.bing.com/search?showconv=1&sendquery=1&q=",
+    "description": "Microsoft",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "perplexity",
+    "category": "ai",
+    "url": "https://www.perplexity.ai/?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "hugging face",
+    "category": "ai",
+    "url": "https://huggingface.co/chat?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "claude ai",
+    "category": "ai",
+    "url": "https://claude.ai/newq=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Gemini ai",
+    "category": "ai",
+    "url": "https://gemini.google.com/app?q=",
+    "description": "Google",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Meta Ai",
+    "category": "ai",
+    "url": "https://www.meta.ai/?q=",
+    "description": "Meta",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "You Ai",
+    "category": "ai",
+    "url": "https://you.com/search?fromSearchBar=true&tbm=youchat&q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Phind Ai",
+    "category": "ai",
+    "url": "https://www.phind.com/agent?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Firefly ai",
+    "category": "ai",
+    "url": "https://firefly.adobe.com/generate/images?prompt=",
+    "description": "Adobe",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },   
+  
+  {
+    "id": "",
+    "name": "Pinterest",
+    "category": "gambar",
+    "url": "https://pinterest.com/search/pins/?q=",
+    "description": "Like",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Unsplash",
+    "category": "gambar",
+    "url": "https://unsplash.com/s/photos/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Giphy",
+    "category": "gambar",
+    "url": "https://giphy.com/search/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Flickr",
+    "category": "gambar",
+    "url": "https://www.flickr.com/search?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Pexels",
+    "category": "gambar",
+    "url": "https://www.pexels.com/search/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Openverse",
+    "category": "gambar",
+    "url": "https://openverse.org/search/?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Freepik",
+    "category": "gambar",
+    "url": "https://www.freepik.com/search?query=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Pixabay",
+    "category": "gambar",
+    "url": "https://pixabay.com/photos/search",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Stock",
+    "category": "gambar",
+    "url": "https://stock.adobe.com/search?k=",
+    "description": "Adobe",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Shutter stock",
+    "category": "gambar",
+    "url": "https://www.shutterstock.com/search?searchterm=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Getty images",
+    "category": "gambar",
+    "url": "https://www.gettyimages.com/photos",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Smugmug",
+    "category": "gambar",
+    "url": "https://www.smugmug.com/search/?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "500px",
+    "category": "gambar",
+    "url": "https://500px.com/search?q=",
+    "description": "Like",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Imgur",
+    "category": "gambar",
+    "url": "https://imgur.com/search?q=",
+    "description": "Like",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Deviantart",
+    "category": "gambar",
+    "url": "https://www.deviantart.com/?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Dribbble",
+    "category": "gambar",
+    "url": "https://dribbble.com/search?q=",
+    "description": "Like",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Behance",
+    "category": "gambar",
+    "url": "https://www.behance.net/search?search=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+            
+  
+  {
+    "id": "",
+    "name": "Spotify",
+    "category": "music",
+    "url": "https://open.spotify.com/search/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Music",
+    "category": "music",
+    "url": "https://music.apple.com/search?term=",
+    "description": "Apple",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Soundcloud",
+    "category": "music",
+    "url": "https://soundcloud.com/search?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Music",
+    "category": "music",
+    "url": "https://music.youtube.com/search?q=",
+    "description": "YouTube",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Music",
+    "category": "music",
+    "url": "https://music.amazon.com/search/",
+    "description": "Amazon",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Pandora",
+    "category": "music",
+    "url": "https://www.pandora.com/search/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Iheart",
+    "category": "music",
+    "url": "https://www.iheart.com/search/?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Tunein",
+    "category": "music",
+    "url": "https://tunein.com/search/?query=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Deezer",
+    "category": "music",
+    "url": "https://www.deezer.com/search/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Listen",
+    "category": "music",
+    "url": "https://listen.tidal.com/search?q=",
+    "description": "Tidal",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Lastfm",
+    "category": "music",
+    "url": "https://www.last.fm/search?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Discogs",
+    "category": "music",
+    "url": "https://www.discogs.com/search/?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Genius",
+    "category": "music",
+    "url": "https://genius.com/search?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Musix match",
+    "category": "music",
+    "url": "https://www.musixmatch.com/search",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Bandcamp",
+    "category": "music",
+    "url": "https://bandcamp.com/search?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Hypem",
+    "category": "music",
+    "url": "http://hypem.com/search/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Audius",
+    "category": "music",
+    "url": "https://audius.co/search/?q=",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+            
+  
+  {
+    "id": "",
+    "name": "Assistant",
+    "category": "google",
+    "url": "https://assistant.google.com/",
+    "description": "",
+    "icon": "i.png",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "News",
+    "category": "google",
+    "url": "https://news.google.com/",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "2",
+    "name": "Gemini",
+    "category": "google",
+    "url": "https://gemini.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": [],
+  }, 
+  {
+    "id": "",
+    "name": "Pay",
+    "category": "google",
+    "url": "https://pay.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Play",
+    "category": "google",
+    "url": "https://play.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Shopping",
+    "category": "google",
+    "url": "https://shopping.google.com/",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Lens",
+    "category": "google",
+    "url": "https://lens.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Message ",
+    "category": "google",
+    "url": "https://message.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Translate",
+    "category": "google",
+    "url": "https://translate.google.com/",
+    "description": "*🌏",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Site",
+    "category": "google",
+    "url": "https://site.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Voice",
+    "category": "google",
+    "url": "https://voice.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Tv",
+    "category": "google",
+    "url": "https://tv.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Admob",
+    "category": "google",
+    "url": "https://admob.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Cloud",
+    "category": "google",
+    "url": "https://cloud.google.com/",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "YouTube",
+    "category": "google",
+    "url": "https://youtube.com/",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "YouTube music",
+    "category": "google",
+    "url": "https://music.youtube.com/",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Trends",
+    "category": "google",
+    "url": "https://trends.youtube.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Sky",
+    "category": "google",
+    "url": "https://google.com/sky",
+    "description": "",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Earth",
+    "category": "google",
+    "url": "https://earth.google.com",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "google",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Facebook ",
+    "category": "social media",
+    "url": "https://www.facebook.com",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Tiktok",
+    "category": "social media",
+    "url": "https://www.tiktok.com",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Instagram",
+    "category": "social media",
+    "url": "https://www.instagram.com",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Twitter",
+    "category": "social media",
+    "url": "https://www.twitter.com",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Wechat",
+    "category": "social media",
+    "url": "https://www.wechat.com",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "QQ",
+    "category": "social media",
+    "url": "https://www.imqq.com",
+    "description": "China",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  
+  
+  
+  {
+    "id": "",
+    "name": "Pantip",
+    "category": "social media",
+    "url": "https://pantip.com/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "LINE Thailand",
+    "category": "social media",
+    "url": "https://line.me/th/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "ThaiVisa Forum",
+    "category": "social media",
+    "url": "https://forum.thaivisa.com/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Sanook",
+    "category": "social media",
+    "url": "https://www.sanook.com/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  
+  
+  
+  {
+    "id": "",
+    "name": "Snapchat Brunei",
+    "category": "social media",
+    "url": "https://www.snapchat.com/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Reddit Brunei",
+    "category": "social media",
+    "url": "https://www.reddit.com/r/Brunei/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  
+  {
+    "id": "",
+    "name": "Kumu",
+    "category": "social media",
+    "url": "https://www.kumu.ph/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "TikTok Philippines",
+    "category": "social media",
+    "url": "https://www.tiktok.com/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Zalo",
+    "category": "social media",
+    "url": "https://zalo.me/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Lotus",
+    "category": "social media",
+    "url": "https://www.lotus.vn/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  
+  {
+    "id": "",
+    "name": "Khmer Chatter",
+    "category": "social media",
+    "url": "https://khmerchatter.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "sosial media",
+    "tags": []
+  },
+  
+  
+   
+  
+  {
+    "id": "",
+    "name": "Blibli",
+    "category": "e-commerce",
+    "url": "https://www.blibli.com/",
+    "description": "Indonesia",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Mister Aladin",
+    "category": "e-commerce",
+    "url": "https://www.misteraladin.com/",
+    "description": "Indonesia",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Tokopedia",
+    "category": "e-commerce",
+    "url": "https://www.tokopedia.com/",
+    "description": "Indonesia",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Lazada",
+    "category": "e-commerce",
+    "url": "https://www.lazada.co.id",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Shopee",
+    "category": "e-commerce",
+    "url": "https://www.shopee.co.id",
+    "description": "*World",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Bukalapak",
+    "category": "e-commerce",
+    "url": "https://www.bukalapak.co.",
+    "description": "Indonesia",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  }, 
+  
+  
+  {
+    "id": "",
+    "name": "Central Online",
+    "category": "e-commerce",
+    "url": "https://www.central.co.th/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "JD Central",
+    "category": "e-commerce",
+    "url": "https://www.jd.co.th/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "WeLoveShopping",
+    "category": "e-commerce",
+    "url": "https://www.weloveshopping.com/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  
+  {
+    "id": "",
+    "name": "Qoo10 Brunei",
+    "category": "e-commerce",
+    "url": "https://www.qoo10.bn/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Brunei Online Market",
+    "category": "e-commerce",
+    "url": "https://bruneionlinemarket.com/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Facebook Marketplace Brunei",
+    "category": "e-commerce",
+    "url": "https://www.facebook.com/marketplace/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Mudah Brunei",
+    "category": "e-commerce",
+    "url": "https://mudah.com.bn/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  
+  {
+    "id": "",
+    "name": "Shopee Philippines",
+    "category": "e-commerce",
+    "url": "https://shopee.ph/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Zalora Philippines",
+    "category": "e-commerce",
+    "url": "https://www.zalora.com.ph/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Metrodeal",
+    "category": "e-commerce",
+    "url": "https://www.metrodeal.com/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Carousell Philippines",
+    "category": "e-commerce",
+    "url": "https://www.carousell.ph/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  
+  
+  {
+    "id": "",
+    "name": "Tiki",
+    "category": "e-commerce",
+    "url": "https://tiki.vn/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Sendo",
+    "category": "e-commerce",
+    "url": "https://www.sendo.vn/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Chotot",
+    "category": "e-commerce",
+    "url": "https://www.chotot.com/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  
+  {
+    "id": "",
+    "name": "Khmer24",
+    "category": "e-commerce",
+    "url": "https://www.khmer24.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Shop168",
+    "category": "e-commerce",
+    "url": "https://www.shop168.com.kh/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Mall855",
+    "category": "e-commerce",
+    "url": "https://www.mall855.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+
+  {
+    "id": "",
+    "name": "Lao eMarket",
+    "category": "e-commerce",
+    "url": "https://laoemarket.la/",
+    "description": "🇱🇦",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  
+  {
+    "id": "",
+    "name": "Muan.la",
+    "category": "e-commerce",
+    "url": "https://muan.la/",
+    "description": "Laos",
+    "icon": "",
+    "websiteType": "belanja",
+    "tags": []
+  },
+  
+  
+  
+  {
+    "id": "",
+    "name": "Detikcom",
+    "category": "news",
+    "url": "https://www.detik.com/",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Liputan6",
+    "category": "news",
+    "url": "https://www.liputan6.com/",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Okezone",
+    "category": "news",
+    "url": "https://www.okezone.com/",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Kompas",
+    "category": "news",
+    "url": "https://www.kompas.com/",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Tempo",
+    "category": "news",
+    "url": "https://www.tempo.co",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "bharian",
+    "category": "news",
+    "url": "https://www.bharian.com.my",
+    "description": "Malaysia",
+    "icon": "",
+    "websiteType": "🇲🇾",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Merdeka",
+    "category": "news",
+    "url": "https://www.merdeka.com",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },{
+    "id": "",
+    "name": "malaysia kini",
+    "category": "news",
+    "url": "https://www.malaysiakini.com",
+    "description": "🇲🇾",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },{
+    "id": "",
+    "name": "Thestar",
+    "category": "news",
+    "url": "https://www.thestar.com.my",
+    "description": "Malaysia",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },{
+    "id": "",
+    "name": "straits times",
+    "category": "news",
+    "url": "https://www.straitstimes.com",
+    "description": "Singapura",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  }, 
+  {
+    "id": "",
+    "name": "Suara",
+    "category": "news",
+    "url": "https://www.suara.com",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Antaranews",
+    "category": "news",
+    "url": "https://www.antaranews.com",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Beritasatu",
+    "category": "news",
+    "url": "https://www.beritasatu.com",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Inews",
+    "category": "news",
+    "url": "https://www.inews.id",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Idntimes",
+    "category": "news",
+    "url": "https://www.idntimes.com",
+    "description": "🇮🇩",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  
+  
+  {
+    "id": "",
+    "name": "Bangkok Post",
+    "category": "news",
+    "url": "https://www.bangkokpost.com/",
+    "description": "🇹🇭",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "The Nation Thailand",
+    "category": "news",
+    "url": "https://www.nationthailand.com/",
+    "description": "🇹🇭",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Thai Enquirer",
+    "category": "news",
+    "url": "https://www.thaienquirer.com/",
+    "description": "🇹🇭",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "VnExpress International",
+    "category": "news",
+    "url": "https://e.vnexpress.net/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "The Thaiger",
+    "category": "news",
+    "url": "https://thethaiger.com/",
+    "description": "Thailand",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Borneo Bulletin",
+    "category": "news",
+    "url": "https://borneobulletin.com.bn/",
+    "description": "🇧🇳",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "The Scoop",
+    "category": "news",
+    "url": "https://thescoop.co/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "RTB News",
+    "category": "news",
+    "url": "https://www.rtbnews.rtb.gov.bn/SitePages/Home.aspx",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Borneo Bulletin Digital",
+    "category": "news",
+    "url": "https://digital.borneobulletin.com.bn/home/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "The Brunei Times",
+    "category": "news",
+    "url": "https://www.bruneitimes.com/",
+    "description": "Brunei Darussalam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "ABS-CBN News",
+    "category": "news",
+    "url": "https://news.abs-cbn.com/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "GMA News Online",
+    "category": "news",
+    "url": "https://www.gmanetwork.com/news/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Philstar.com",
+    "category": "news",
+    "url": "https://www.philstar.com/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Inquirer.net",
+    "category": "news",
+    "url": "https://www.inquirer.net/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Rappler",
+    "category": "news",
+    "url": "https://www.rappler.com/",
+    "description": "Filipina",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Vietnam News Agency (VNA)",
+    "category": "news",
+    "url": "https://vnanet.vn/en/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Vietnam News",
+    "category": "news",
+    "url": "https://vietnamnews.vn/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "The Saigon Times",
+    "category": "news",
+    "url": "https://english.thesaigontimes.vn/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Vietnam Investment Review",
+    "category": "news",
+    "url": "https://www.vir.com.vn/",
+    "description": "Vietnam",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Phnom Penh Post",
+    "category": "news",
+    "url": "https://www.phnompenhpost.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Khmer Times",
+    "category": "news",
+    "url": "https://www.khmertimeskh.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "The Cambodia Daily",
+    "category": "news",
+    "url": "https://english.cambodiadaily.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "VOA Khmer News",
+    "category": "news",
+    "url": "https://www.voacambodia.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Innews",
+    "category": "news",
+    "url": "https://influence-news.com/",
+    "description": "Kamboja",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Vientiane Times",
+    "category": "news",
+    "url": "https://www.vientianetimes.org.la/",
+    "description": "Laos",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Lao News Agency (KPL)",
+    "category": "news",
+    "url": "https://kpl.gov.la/EN/",
+    "description": "Laos",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Laotian Times",
+    "category": "news",
+    "url": "https://laotiantimes.com/",
+    "description": "Laos",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "The Laos Observer",
+    "category": "news",
+    "url": "https://www.laosobserver.com/",
+    "description": "Laos",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Al Jazeera - Laos",
+    "category": "news",
+    "url": "https://www.aljazeera.com/where/laos/",
+    "description": "Laos",
+    "icon": "",
+    "websiteType": "berita",
+    "tags": []
+  },
+
+  {
+    "id": "",
+    "name": "Google",
+    "category": "search",
+    "url": "https://www.google.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Dogpile",
+    "category": "search",
+    "url": "https://www.dogpile.com",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Hotbot",
+    "category": "search",
+    "url": "https://www.hotbot.com",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Bing",
+    "category": "search",
+    "url": "https://www.bing.com",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Baidu",
+    "category": "search",
+    "url": "https://www.baidu.com",
+    "description": "🇨🇳",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Sogou",
+    "category": "search",
+    "url": "https://www.sogou.com",
+    "description": "🇨🇳",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Yandex",
+    "category": "search",
+    "url": "https://www.yandex.com",
+    "description": "🇷🇺",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Neeva",
+    "category": "search",
+    "url": "https://www.neeva.com",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Qmamu",
+    "category": "search",
+    "url": "https://www.qmamu.com",
+    "description": "🇮🇳",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Yahoo",
+    "category": "search",
+    "url": "https://www.yahoo.com",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "You",
+    "category": "search",
+    "url": "https://www.you.com",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Fiqfuq",
+    "category": "Tiktok 18",
+    "url": "https://fiqfuq.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Xxxtik",
+    "category": "Tiktok 18",
+    "url": "https://xxxtik.com/",
+    "description": "18+",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Fikfap",
+    "category": "Tiktok 18",
+    "url": "https://fikfap.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "Fikfap",
+    "category": "Tiktok 18",
+    "url": "https://fikfap.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "pin.porn",
+    "category": "Tiktok 18",
+    "url": "https://pin.porn/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  },
+  {
+    "id": "",
+    "name": "onlytik",
+    "category": "Tiktok 18",
+    "url": "https://onlytik.com/",
+    "description": "",
+    "icon": "",
+    "websiteType": "app",
+    "tags": []
+  } 
+
+
+
+
+];
+
+            const container = document.getElementById('container');
+            const menu = document.getElementById('menu');
+
+            const categories = {};
+
+            // Organize items by category
+            data.forEach(item => {
+                if (!categories[item.category]) {
+                    categories[item.category] = [];
+                }
+                categories[item.category].push(item);
+            });
+
+            // Create ad card
+            const adCard = document.createElement('div');
+            adCard.classList.add('ad-card');
+            adCard.textContent = "Ads By ℹ️ ✖️ kobisa (2USD).";
+            adCard.addEventListener('click', moveAdCard);
+
+            // Function to move ad card to a random category
+            function moveAdCard() {
+                const categoryCards = document.querySelectorAll('.category-card');
+                const randomCategory = categoryCards[Math.floor(Math.random() * categoryCards.length)];
+                randomCategory.insertBefore(adCard, randomCategory.children[1]);
+            }
+
+            function createCategoryTitle(category) {
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.textContent = category;
+                return categoryTitle;
+            }
+
+            function createCategoryCard(categoryId, category) {
+                const categoryCard = document.createElement('div');
+                categoryCard.classList.add('category-card');
+                categoryCard.id = categoryId;
+                categoryCard.appendChild(createCategoryTitle(category));
+                return categoryCard;
+            }
+
+            for (const category in categories) {
+                const categoryId = category.replace(/\s+/g, '-').toLowerCase();
+
+                // Add category link to menu
+                const categoryLink = document.createElement('a');
+                categoryLink.href = `#${categoryId}`;
+                categoryLink.textContent = category;
+                menu.appendChild(categoryLink);
+
+                // Create category card
+                const categoryCard = createCategoryCard(categoryId, category);
+
+                categories[category].forEach(item => {
+                    const card = document.createElement('div');
+                    card.classList.add('card');
+
+                    const title = document.createElement('h3');
+                    title.textContent = item.name;
+                    card.appendChild(title);
+
+                    const description = document.createElement('p');
+                    description.textContent = ` ${item.description}`;
+                    card.appendChild(description);
+
+                    const link = document.createElement('a');
+                    link.href = item.url;
+                    link.textContent = 'Views';
+                    link.target = '_blank';
+                    card.appendChild(link);
+
+                    if (item.tags && item.tags.length > 0) {
+                        const tagsContainer = document.createElement('div');
+                        tagsContainer.classList.add('tags');
+
+                        item.tags.forEach(tag => {
+                            const tagElement = document.createElement('span');
+                            tagElement.textContent = tag;
+                            tagsContainer.appendChild(tagElement);
+                        });
+
+                        card.appendChild(tagsContainer);
+                    }
+
+                    categoryCard.appendChild(card);
+                });
+
+                container.appendChild(categoryCard);
+            }
+
+            // Insert ad card initially
+            moveAdCard();
+        });
+        
+        
+        
+        
+        
+    </script>
+    
+    <script>document.addEventListener("DOMContentLoaded", function() {
+  fetch('https://ipinfo.io/json')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('ip-address').innerText = `IP : ${data.ip}`;
+      document.getElementById('country').innerText = ` ${data.country}`;
+      document.getElementById('software').innerText = ` Soft : ${data.org}`;
+    })
+    .catch(error => console.error('Error:', error));
+});</script>
+
+
+
+<script>function screenSize() {
+  var width = screen.width;
+  var height = screen.height;
+
+  document.getElementById("screen").innerHTML = width + " x " + height;
+}
+
+screenSize();
+
+setInterval(() => {
+  screenSize();
+}, 100);
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Pastikan untuk mengambil elemen tombol dan input pencarian
+    const searchButton = document.getElementById("search-button");
+    const searchQuery = document.getElementById("search-query");
+    const searchEngine = document.getElementById("search-engine");
+
+    // Tambahkan event listener untuk tombol cari
+    searchButton.addEventListener("click", function() {
+        search(searchQuery.value, searchEngine.value);
+    });
+
+    // Fungsi untuk melakukan pencarian
+    function search(query, engineUrl) {
+        // Cek apakah query pencarian kosong
+        if (query.trim() === "") {
+            alert("Masukkan kata kunci terlebih dahulu.");
+            return;  // Jangan lanjutkan jika query kosong
+        }
+
+        // Buat URL pencarian berdasarkan mesin pencari yang dipilih
+        const searchUrl = engineUrl + encodeURIComponent(query);
+        
+        // Redirect ke URL pencarian
+        window.location.href = searchUrl;
+    }
+});
+
+</script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+    const trendingData = [
+        {
+            "name": "Google",
+            "url": "https://www.google.com",
+            "image": "https://mansitee.github.io/p/allsite/google.png"
+        },
+        {
+            "name": "Bing",
+            "url": "https://www.bing.com",
+            "image": "https://mansitee.github.io/p/allsite/bing.png"
+        },
+        {
+            "name": "Yahoo",
+            "url": "https://www.yahoo.com",
+            "image": "https://mansitee.github.io/p/allsite/yahoo.png"
+        },
+        {
+            "name": "Wikipedia",
+            "url": "https://www.wikipedia.org",
+            "image": "https://mansitee.github.io/p/allsite/wikipedia.png"
+        },
+        {
+            "name": "Bin",
+            "url": "https://www.bing.com",
+            "image": "https://www.bing.com/th?id=OIP.7Mv0-ZGc5Rt7d9g9JdM6kgHaHa&pid=Api"
+        }
+    ];
+
+    const container = document.getElementById('trending-container');
+
+    // Looping through JSON data to create HTML elements for each item
+    trendingData.forEach(item => {
+        const div = document.createElement('div');
+        div.classList.add('trending-item');
+
+        const anchor = document.createElement('a');
+        anchor.href = item.url;
+        anchor.target = "_blank";
+
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = `Logo of ${item.name}`; // Adding alt text
+        img.loading = "lazy"; // Adding lazyload
+
+        const p = document.createElement('p');
+        p.textContent = item.name;
+
+        // Append image and text to anchor
+        anchor.appendChild(img);
+        anchor.appendChild(p);
+
+        // Append anchor to div
+        div.appendChild(anchor);
+
+        // Append div to container
+        container.appendChild(div);
+    });
+});
+
+</script>
+
+
+<script>
+    const toggleButton = document.getElementById('toggle-dark-mode');
+    const body = document.body;
+
+    // Check if dark mode is enabled in localStorage
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        body.classList.add('dark-mode');
+        toggleButton.textContent = '🌒'; // Switch to dark mode icon
+    }
+
+    // Toggle dark mode on button click
+    toggleButton.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        
+        // Toggle icon based on dark mode status
+        if (body.classList.contains('dark-mode')) {
+            toggleButton.textContent = '🌒'; // Dark mode icon
+            localStorage.setItem('dark-mode', 'enabled');
+        } else {
+            toggleButton.textContent = '🌞'; // Light mode icon
+            localStorage.setItem('dark-mode', 'disabled');
+        }
+    });
+</script>
+
+<script>
+        // Memastikan Service Worker dapat dipasang
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(registration => {
+                        console.log('Service Worker terdaftar dengan baik:', registration);
+                    })
+                    .catch(error => {
+                        console.log('Pendaftaran Service Worker gagal:', error);
+                    });
+            });
+        }
+    </script>
+
+</body>
+</html>
