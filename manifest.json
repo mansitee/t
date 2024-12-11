@@ -1,6 +1,7 @@
 {
   "name": "Simple M",
   "short_name": "Simple M PWA",
+  "description": "Sedang dalam proses",
   "display": "standalone",
   "start_url": "./?utm_source=pwa_install",
   "scope": ".",
@@ -60,6 +61,7 @@
     }
   ],
   "lang": "id",
+  "dir": "auto",
   "orientation": "portrait",
   "display_override": [
     "standalone",
@@ -88,4 +90,3 @@
     }
   }
 }
-    
