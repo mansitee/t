@@ -1,5 +1,5 @@
 {
-  "name": "Simple M ",
+  "name": "Simple M",
   "short_name": "Simple M PWA",
   "display": "standalone",
   "start_url": "./?utm_source=pwa_install",
@@ -70,7 +70,7 @@
     "personalization",
     "productivity",
     "utilities"
-  ], 
+  ],
   "shortcuts": [
     {
       "name": "Page",
@@ -86,16 +86,6 @@
       "text": "Page baca",
       "url": "https://mansitee.github.io/p/"
     }
-  },
-  {
-  "edge_side_panel": {
-    "preferred_width": 400
   }
 }
-
-}
-
-
-
-
     
